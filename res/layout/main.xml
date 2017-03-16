@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:visibility="visible" >
+
+		<FrameLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="0.1" >
+
+		    <android.opengl.GLSurfaceView
+		        android:id="@+id/mSurfaceView"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1" />
+
+		    <RelativeLayout
+		        android:id="@+id/overlay_display_container"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        android:visibility="visible" >
+
+		        <LinearLayout
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentLeft="true"
+		            android:layout_alignParentTop="true"
+		            android:orientation="vertical" >
+
+		            <TextView
+		                android:id="@+id/display_ch1"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="CH1: 2.0V"
+		                android:textColor="@color/blue" />
+
+		            <TextView
+		                android:id="@+id/display_ch2"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="CH2: 1.0V"
+		                android:textColor="@color/green" />
+		        </LinearLayout>
+
+		        <LinearLayout
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentRight="true"
+		            android:layout_alignParentTop="true"
+		            android:orientation="vertical" >
+
+		            <TextView
+		                android:id="@+id/display_time"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="t: 5[us]" />
+		        </LinearLayout>
+		    </RelativeLayout>
+
+		    <RelativeLayout
+		        android:id="@+id/overlay_cursors_container"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        android:visibility="visible" >
+
+		        <LinearLayout
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentBottom="true"
+		            android:layout_alignParentLeft="true"
+		            android:orientation="vertical" >
+
+		            <TextView
+		                android:id="@+id/display_dch1"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="dCH1:"
+		                android:textColor="@color/blue" />
+
+		            <TextView
+		                android:id="@+id/display_dch2"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="dCH2:"
+		                android:textColor="@color/green" />
+		        </LinearLayout>
+
+		        <LinearLayout
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentBottom="true"
+		            android:layout_alignParentRight="true"
+		            android:orientation="vertical" >
+
+		            <TextView
+		                android:id="@+id/display_dt"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="dt: " />
+
+		            <TextView
+		                android:id="@+id/display_freq"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="f: " />
+		        </LinearLayout>
+
+		        <ch.serverbox.android.osciprime.ui.SeekBarOverlay
+		            android:id="@+id/overlay_cursors_top"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:max="100"
+		            android:padding="0px"
+		            android:progress="20"
+		            android:progressDrawable="@drawable/my_seekbar"
+		            android:tag="top"
+		            android:thumb="@drawable/thumb_t0" />
+
+		        <ch.serverbox.android.osciprime.ui.SeekBarOverlay
+		            android:id="@+id/overlay_cursors_bottom"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:max="100"
+		            android:padding="0px"
+		            android:progress="80"
+		            android:progressDrawable="@drawable/my_seekbar"
+		            android:tag="bottom"
+		            android:thumb="@drawable/thumb_t1" />
+
+		        <ch.serverbox.android.osciprime.ui.VerticalSeekBarOverlay
+		            android:id="@+id/overlay_cursors_right"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:max="100"
+		            android:padding="0px"
+		            android:progress="80"
+		            android:progressDrawable="@drawable/my_seekbar"
+		            android:tag="right"
+		            android:thumb="@drawable/thumb_v1" />
+
+		        <ch.serverbox.android.osciprime.ui.VerticalSeekBarOverlay
+		            android:id="@+id/overlay_cursors_left"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:max="100"
+		            android:padding="0px"
+		            android:progress="20"
+		            android:progressDrawable="@drawable/my_seekbar"
+		            android:tag="left"
+		            android:thumb="@drawable/thumb_v0" />
+
+		        <ch.serverbox.android.osciprime.ui.OverlayCursors
+		            android:id="@+id/overlay_cursors"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:clickable="true" />
+		    </RelativeLayout>
+
+		    <RelativeLayout
+		        android:id="@+id/overlay_channels_container"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        android:visibility="invisible" >
+
+		        <ch.serverbox.android.osciprime.ui.SeekBarOverlay
+		            android:id="@+id/overlay_channels_top"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:max="100"
+		            android:padding="0px"
+		            android:progress="50"
+		            android:progressDrawable="@drawable/my_seekbar"
+		            android:tag="top"
+		            android:thumb="@drawable/thumb_toff" />
+
+		        <ch.serverbox.android.osciprime.ui.VerticalSeekBarOverlay
+		            android:id="@+id/overlay_channels_right"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:max="100"
+		            android:padding="0px"
+		            android:progress="50"
+		            android:progressDrawable="@drawable/my_seekbar"
+		            android:secondaryProgress="50"
+		            android:tag="right"
+		            android:thumb="@drawable/thumb_ch2" />
+
+		        <ch.serverbox.android.osciprime.ui.VerticalSeekBarOverlay
+		            android:id="@+id/overlay_channels_left"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:max="100"
+		            android:padding="0px"
+		            android:progress="50"
+		            android:progressDrawable="@drawable/my_seekbar"
+		            android:secondaryProgress="50"
+		            android:tag="left"
+		            android:thumb="@drawable/thumb_ch1" />
+
+		        <ch.serverbox.android.osciprime.ui.OverlayChannels
+		            android:id="@+id/overlay_channels"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:clickable="true" />
+		    </RelativeLayout>
+
+		    <RelativeLayout
+		        android:id="@+id/overlay_trigger_container"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        android:visibility="invisible" >
+
+		        <ch.serverbox.android.osciprime.ui.SeekBarOverlay
+		            android:id="@+id/overlay_trigger_top"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:max="100"
+		            android:padding="0px"
+		            android:progress="50"
+		            android:progressDrawable="@drawable/my_seekbar"
+		            android:tag="top"
+		            android:thumb="@drawable/thumb_toff" />
+
+		        <ch.serverbox.android.osciprime.ui.VerticalSeekBarOverlay
+		            android:id="@+id/overlay_trigger_right"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:max="100"
+		            android:padding="0px"
+		            android:progress="50"
+		            android:progressDrawable="@drawable/my_seekbar"
+		            android:secondaryProgress="50"
+		            android:tag="right"
+		            android:thumb="@drawable/thumb_ch2" />
+
+		        <ch.serverbox.android.osciprime.ui.VerticalSeekBarOverlay
+		            android:id="@+id/overlay_trigger_left"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:max="100"
+		            android:padding="0px"
+		            android:progress="50"
+		            android:progressDrawable="@drawable/my_seekbar"
+		            android:secondaryProgress="50"
+		            android:tag="left"
+		            android:thumb="@drawable/thumb_ch1" />
+
+		        <ch.serverbox.android.osciprime.ui.OverlayTrigger
+		            android:id="@+id/overlay_trigger"
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:clickable="true" />
+		    </RelativeLayout>
+
+		    <RelativeLayout
+		        android:id="@+id/overlay_menu"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        android:visibility="invisible" >
+
+		        <LinearLayout
+		            android:id="@+id/menu"
+		            android:layout_width="fill_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentBottom="true"
+		            android:orientation="horizontal"
+		            android:weightSum="7" >
+
+		            <Button
+		                android:id="@+id/btOn"
+		                android:layout_width="fill_parent"
+		                android:layout_height="wrap_content"
+		                android:layout_weight="1"
+		                android:text="On"
+		                android:visibility="invisible" />
+
+		            <Button
+		                android:id="@+id/btOff"
+		                android:layout_width="fill_parent"
+		                android:layout_height="wrap_content"
+		                android:layout_weight="1"
+		                android:text="Off"
+		                android:visibility="invisible" />
+
+		            <Button
+		                android:id="@+id/menu_button_channels"
+		                android:layout_width="fill_parent"
+		                android:layout_height="wrap_content"
+		                android:layout_weight="1"
+		                android:text="CH."
+		                android:visibility="invisible" />
+
+		            <Button
+		                android:id="@+id/menu_button_trigger"
+		                android:layout_width="fill_parent"
+		                android:layout_height="wrap_content"
+		                android:layout_weight="1"
+		                android:text="T"
+		                android:visibility="invisible" />
+
+		            <Button
+		                android:id="@+id/menu_button_sources"
+		                android:layout_width="fill_parent"
+		                android:layout_height="wrap_content"
+		                android:layout_weight="1"
+		                android:text="S"
+		                android:visibility="invisible" />
+
+		            <Button
+		                android:id="@+id/menu_button_cursors"
+		                android:layout_width="fill_parent"
+		                android:layout_height="wrap_content"
+		                android:layout_weight="1"
+		                android:text="CUR."
+		                android:visibility="invisible" />
+
+		            <Button
+		                android:id="@+id/menu_button_calibrate"
+		                android:layout_width="fill_parent"
+		                android:layout_height="wrap_content"
+		                android:layout_weight="1"
+		                android:text="CAL."
+		                android:visibility="invisible" />
+		        </LinearLayout>
+
+		        <LinearLayout
+		            android:layout_width="fill_parent"
+		            android:layout_height="fill_parent"
+		            android:layout_alignParentTop="true"
+		            android:layout_marginLeft="200px"
+		            android:layout_marginRight="200px" >
+
+		            <FrameLayout
+		                android:id="@+id/advanced"
+		                android:layout_width="fill_parent"
+		                android:layout_height="fill_parent"
+		                android:background="#DCDCDCDC"
+		                android:visibility="invisible" >
+
+		                <ScrollView
+		                    android:id="@+id/advanced_trigger"
+		                    android:layout_width="fill_parent"
+		                    android:layout_height="fill_parent"
+		                    android:visibility="invisible" >
+
+		                    <LinearLayout
+		                        android:layout_width="fill_parent"
+		                        android:layout_height="fill_parent"
+		                        android:orientation="vertical"
+		                        android:padding="20px" >
+
+		                        <TextView
+		                            android:layout_width="wrap_content"
+		                            android:layout_height="wrap_content"
+		                            android:text="Polarity" />
+
+		                        <RadioGroup
+		                            android:id="@+id/trigger_polarity"
+		                            android:layout_width="wrap_content"
+		                            android:layout_height="wrap_content" >
+
+		                            <RadioButton
+		                                android:id="@+id/trigger_rising"
+		                                android:layout_width="wrap_content"
+		                                android:layout_height="wrap_content"
+		                                android:text="Rising Edge" />
+
+		                            <RadioButton
+		                                android:id="@+id/trigger_falling"
+		                                android:layout_width="wrap_content"
+		                                android:layout_height="wrap_content"
+		                                android:text="Falling Edge" />
+		                        </RadioGroup>
+
+		                        <TextView
+		                            android:layout_width="wrap_content"
+		                            android:layout_height="wrap_content"
+		                            android:text="Channel" />
+
+		                        <RadioGroup
+		                            android:id="@+id/trigger_channel"
+		                            android:layout_width="wrap_content"
+		                            android:layout_height="wrap_content" >
+
+		                            <RadioButton
+		                                android:id="@+id/trigger_channel1"
+		                                android:layout_width="wrap_content"
+		                                android:layout_height="wrap_content"
+		                                android:text="CH1" />
+
+		                            <RadioButton
+		                                android:id="@+id/trigger_channel2"
+		                                android:layout_width="wrap_content"
+		                                android:layout_height="wrap_content"
+		                                android:text="CH2" />
+		                        </RadioGroup>
+		                    </LinearLayout>
+		                </ScrollView>
+
+		                <ScrollView
+		                    android:id="@+id/advanced_sources"
+		                    android:layout_width="fill_parent"
+		                    android:layout_height="fill_parent"
+		                    android:visibility="invisible" >
+
+		                    <LinearLayout
+		                        android:layout_width="fill_parent"
+		                        android:layout_height="fill_parent"
+		                        android:orientation="vertical"
+		                        android:padding="20px" >
+
+		                        <TextView
+		                            android:layout_width="wrap_content"
+		                            android:layout_height="wrap_content"
+		                            android:text="Source Selection" />
+
+		                        <RadioGroup
+		                            android:id="@+id/source_selection"
+		                            android:layout_width="wrap_content"
+		                            android:layout_height="wrap_content" >
+
+		                            <RadioButton
+		                                android:id="@+id/source_audio"
+		                                android:layout_width="wrap_content"
+		                                android:layout_height="wrap_content"
+		                                android:text="Audio" />
+
+		                            <RadioButton
+		                                android:id="@+id/source_generator"
+		                                android:layout_width="wrap_content"
+		                                android:layout_height="wrap_content"
+		                                android:text="Generator" />
+
+		                            <RadioButton
+		                                android:id="@+id/source_usb"
+		                                android:layout_width="wrap_content"
+		                                android:layout_height="wrap_content"
+		                                android:text="USB" />
+
+		                            <RadioButton
+		                                android:id="@+id/source_fpga"
+		                                android:layout_width="wrap_content"
+		                                android:layout_height="wrap_content"
+		                                android:text="FPGA" />
+		                        </RadioGroup>
+		                    </LinearLayout>
+		                </ScrollView>
+
+		                <ScrollView
+		                    android:id="@+id/advanced_channels"
+		                    android:layout_width="fill_parent"
+		                    android:layout_height="fill_parent"
+		                    android:visibility="invisible" >
+
+		                    <LinearLayout
+		                        android:layout_width="fill_parent"
+		                        android:layout_height="fill_parent"
+		                        android:orientation="vertical"
+		                        android:padding="10px" >
+
+		                        <LinearLayout
+		                            android:layout_width="fill_parent"
+		                            android:layout_height="wrap_content"
+		                            android:orientation="horizontal"
+		                            android:weightSum="3" >
+
+		                            <CheckBox
+		                                android:id="@+id/checkbox_show_channel1"
+		                                android:layout_width="fill_parent"
+		                                android:layout_height="wrap_content"
+		                                android:layout_weight="1"
+		                                android:text="CH1" />
+
+		                            <CheckBox
+		                                android:id="@+id/checkbox_show_channel2"
+		                                android:layout_width="fill_parent"
+		                                android:layout_height="wrap_content"
+		                                android:layout_weight="1"
+		                                android:text="CH2" />
+
+		                            <TextView
+		                                android:layout_width="fill_parent"
+		                                android:layout_height="wrap_content"
+		                                android:layout_weight="1" />
+		                        </LinearLayout>
+
+		                        <LinearLayout
+		                            android:id="@+id/divisions"
+		                            android:layout_width="fill_parent"
+		                            android:layout_height="fill_parent"
+		                            android:orientation="horizontal"
+		                            android:padding="20px"
+		                            android:weightSum="3" >
+
+		                            <LinearLayout
+		                                android:layout_width="fill_parent"
+		                                android:layout_height="wrap_content"
+		                                android:layout_weight="1"
+		                                android:orientation="vertical" >
+		                            </LinearLayout>
+
+		                            <LinearLayout
+		                                android:layout_width="fill_parent"
+		                                android:layout_height="wrap_content"
+		                                android:layout_weight="1"
+		                                android:orientation="vertical" >
+		                            </LinearLayout>
+
+		                            <LinearLayout
+		                                android:layout_width="fill_parent"
+		                                android:layout_height="wrap_content"
+		                                android:layout_weight="1"
+		                                android:orientation="vertical" >
+		                            </LinearLayout>
+		                        </LinearLayout>
+		                    </LinearLayout>
+		                </ScrollView>
+		            </FrameLayout>
+		        </LinearLayout>
+		    </RelativeLayout>
+		</FrameLayout>
+
+		<LinearLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="0.9"
+		    android:background="#ffd0d0d0"
+		    android:orientation="vertical" >
+
+			<TextView
+			    android:id="@+id/TextView02"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+		    <TextView
+		        android:id="@+id/textView1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dp"
+		        android:text="@string/tvMaxADCselectlabel"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+		    
+		    <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkedButton="@+id/radioButton1" >
+
+                <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rbtCh1label" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rbtCh2label" />
+            </RadioGroup>
+            
+			<TextView
+		        android:id="@+id/textView2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textAppearance="?android:attr/textAppearanceLarge" /><TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/tvTiADCselectlabel"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkedButton="@+id/RadioButton01" >
+
+                <RadioButton
+                    android:id="@+id/RadioButton01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rbtCh1label" />
+
+                <RadioButton
+                    android:id="@+id/RadioButton02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rbtCh2label" />
+
+                <RadioButton
+                    android:id="@+id/RadioButton03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rbtCh3label" />
+
+                <RadioButton
+                    android:id="@+id/RadioButton04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rbtCh4label" />
+            </RadioGroup>
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/ImageView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/mvtech" />
+
+        </LinearLayout>
+
+	</LinearLayout>
+
+	<LinearLayout
+	    android:id="@+id/linearLayout1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:visibility="gone"
+	    android:weightSum="2" >
+
+		<Button
+		    android:id="@+id/menu_button_run"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:text="RUN"
+		    android:visibility="visible" />
+
+	</LinearLayout>
+</LinearLayout>

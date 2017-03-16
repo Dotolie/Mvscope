@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, OsciPrime!</string>
+    <string name="app_name">Mvscope</string>
+    <string name="tvMaxADCselectlabel">Max CH Select</string>
+    <string name="tvTiADCselectlabel">TI CH Select</string>
+    <string name="rbtCh1label">CH1</string>
+    <string name="rbtCh2label">CH2</string>
+    <string name="rbtCh3label">CH3</string>
+    <string name="rbtCh4label">CH4</string>
+</resources>
